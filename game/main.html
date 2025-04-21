@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Бей Бобра Кувалдой!</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Бей Бобра Кувалдой!</h1>
+  <div id="game-container">
+    <div id="bobr"></div>
+  </div>
+  <p>Очки: <span id="score">0</span></p>
+  <button id="start-button">Начать Игру</button>
+
+  <script>
+    const gameContainer = document.getElementById('game-container');
+    const bobr = document.getElementById('bobr');
+    const scoreDisplay = document.getElementById('score');
+    const startButton = document.getElementById('start-button');
+
+    let score = 0;
+    let gameRunning = false;
+    let intervalId;
+
+    function getRandomPosition() {
+      const containerWidth = gameContainer.offsetWidth;
+      const containerHeight = gameContainer.offsetHeight;
+      const bobrWidth = bobr.offsetWidth;
+      const bobrHeight = bobr.offsetHeight;
+
+      const x = Math.random() * (containerWidth - bobrWidth);
+      const y = Math.random() * (containerHeight - bobrHeight - 30);
+      return { x, y };
+    }
+
+    function moveBobr() {
+      const newPosition = getRandomPosition();
+      bobr.style.left = newPosition.x + 'px';
+      bobr.style.top = newPosition.y + 'px';
+    }
+
+    function incrementScore() {
+      score++;
+      scoreDisplay.textContent = score;
+    }
+
+    function startGame() {
+      score = 0;
+      scoreDisplay.textContent = score;
+      gameRunning = true;
+      startButton.disabled = true;
+
+      moveBobr();
+      intervalId = setInterval(moveBobr, 1200);
+    }
+
+    function endGame() {
+      gameRunning = false;
+      startButton.disabled = false;
+      clearInterval(intervalId);
+      alert(`Игра окончена! Вы набили ${score} бобров!`);
+    }
+
+    bobr.addEventListener('click', () => {
+      if (gameRunning) {
+        incrementScore();
+        bobr.classList.add('hit');
+        setTimeout(() => bobr.classList.remove('hit'), 100);
+        moveBobr();
+      }
+    });
+
+    startButton.addEventListener('click', startGame);
+    setTimeout(endGame, 30000);
+	
+    const bobrImage = new Image();
+    bobrImage.src = 'bobr.gif';
+
+    const hammerCursor = new Image();
+    hammerCursor.src = 'molot.gif';
+
+  </script>
+</body>
+</html>

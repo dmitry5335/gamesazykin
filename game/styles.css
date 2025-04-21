@@ -1,0 +1,68 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+h1 {
+  color: #333;
+  margin-top: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#game-container {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: 20px auto;
+  background-image: url('trava.jpg');
+  background-size: cover;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#bobr {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-image: url('bobr.gif'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: url('molot.gif'), auto;
+  transition: transform 0.1s ease;
+  transform-origin: center bottom;
+}
+
+#bobr.hit {
+  transform: rotate(-20deg) scale(1.1);
+}
+
+#score {
+  font-size: 24px;
+  color: #4CAF50;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#start-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+#start-button:hover {
+  background-color: #388E3C;
+}
+
+#start-button:disabled {
+  background-color: #9E9E9E;
+  cursor: not-allowed;
+  box-shadow: none;
+}
